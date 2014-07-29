@@ -31,6 +31,18 @@ public final class ActorSystemGenerator {
 
         pc.setSuperclass(asc);
 
+        /*
+        final CtClass rc = pool.get(RequestMakerExpectingResponse.class.getName());
+        final CtClass test = pool.
+            makeClass("acolyte.reactivemongo.ExpectingResponse");
+
+        test.setSuperclass(rc);
+
+        //test.addConstructor(CtNewConstructor.make(new CtClass[0], new CtClass[0], "{ }", test));
+
+        test.toClass();
+        */
+
         // New fields
         pc.addField(CtField.make("private final " + ActorSystem.class.getName() + " underlying;", pc));
         pc.addField(CtField.make("private final " + ActorRefFactory.class.getName() + " refFactory;", pc));
@@ -94,4 +106,3 @@ public final class ActorSystemGenerator {
         };
     } // end of writeTo
 } // end of class ActorSystemGenerator
-
