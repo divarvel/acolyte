@@ -15,7 +15,8 @@ trait JdbcDriver { deps: Dependencies ⇒
       crossPaths := false,
       sourceGenerators in Compile <+= (baseDirectory in Compile) zip (sourceManaged in Compile) map (dirs ⇒ {
         val (base, managed) = dirs
-        generateRowClasses(base, managed / "acolyte", "acolyte", true) ++ generateRowClasses(base, managed / "acolyte" / "jdbc", "acolyte.jdbc", false)
+        generateRowClasses(base, managed / "acolyte" / "jdbc", 
+          "acolyte.jdbc", false)
       }))
 
   // Source generator
@@ -107,7 +108,7 @@ public final class Rows {""".format(pkg,
     }
 
     val listTmpl = basedir / "src" / "main" / "templates" / "RowList.tmpl"
-    val rowLists: Seq[java.io.File] = for (n ← 1 to lim) yield {
+    val rowLists: Seq[File] = for (n ← 1 to lim) yield {
       val f = outdir / s"RowList$n.java"
       val cp = for (i ← 0 until n) yield letter(i)
       val cs = for (i ← 0 until n) yield s"final Class<${letter(i)}> c$i"
